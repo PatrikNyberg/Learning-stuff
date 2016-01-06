@@ -6,67 +6,24 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            while (Console.ReadLine() != "n")
-            {
-                Random random = new Random();
-                int previous = random.Next(1,100);
-                Console.WriteLine(previous);
-                Console.WriteLine("Higher(h) or Lower(l)?");
-                string answer = Console.ReadLine();
-                if (answer == "h")
-                {
-                    int next = random.Next(1, 100);
-                    Console.WriteLine(next);
-                    if (next > previous)
-                    {
-                        Console.WriteLine("You win! Press Enter to play again");
-                    }
-                    else if (next == previous)
-                    {
-                        Console.WriteLine("It's a Draw! Press Enter to play again");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You lose!");
-                        Console.WriteLine("Play again? (y/n)");
-                        Console.ReadLine();
-                    }
-                  }
+            bool play = true;
+            NewNumber getNewNumber = new NewNumber();
+            Game game = new Game();
 
-                if (answer == "l")
-                {
-                    int next = random.Next(1, 100);
-                    Console.WriteLine(next);
-                    if (next < previous)
-                    {
-                        Console.WriteLine("You win! Press Enter to play again");
-                    }
-                    else if (next == previous)
-                    {
-                        Console.WriteLine("It's a Draw! Press Enter to play again");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You lose!");
-                        Console.WriteLine("Play again? (y/n)");
-                        Console.ReadLine();
-                    }
-                }
-                if (answer == "d")
-                {
-                    int next = random.Next(1, 100);
-                    Console.WriteLine(next);
-                    if (next == previous)
-                    {
-                        Console.WriteLine("YOU WIN JACKPOT!!! Please stop playing now.. or press Enter");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You gambled but obviously you lost!");
-                        Console.WriteLine("Play again? (y/n)");
-                        Console.ReadLine();
-                    }
-                }
+            Console.WriteLine("Play a game of High/Low, guesse if the next didget vill be higher, lower or the same as the previous one.");
+            int next = getNewNumber.newInt();
+            //int random = getNewNumber.newInt(5, 10); // Ur samma klass kan vi oxå sätta ett bestämt värde.
+            int previous;
+
+            while (play)
+            {
+                Console.WriteLine("You've got number: {0}, is the next one Higher(h) or Lower(l)?", next);
+                previous = next;
+                string answer = Console.ReadLine();
+                next = getNewNumber.newInt();
+                Console.Clear();
+                Console.WriteLine("The new number is {0}.", next);
+                game.Evaluate(previous, next, answer);
             }
         }
     }
